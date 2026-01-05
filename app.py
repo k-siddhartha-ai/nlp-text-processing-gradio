@@ -1,16 +1,9 @@
-import streamlit as st
+import gradio as gr
 import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-# Page Configuration
-st.set_page_config(
-    page_title="NLP Text Processing Playground",
-    page_icon="🧠",
-    layout="centered"
-)
 
-# NLTK Setup (Hugging Face safe)
-@st.cache_resource
+# ---------- NLTK SETUP (HF SAFE) ----------
 def setup_nltk():
     nltk.download("punkt", quiet=True)
     nltk.download("wordnet", quiet=True)
@@ -18,65 +11,51 @@ def setup_nltk():
 
 setup_nltk()
 
-# Title & Description
-st.title("🧠 NLP Text Processing Playground")
-st.subheader("Tokenization • Stemming • Lemmatization")
+# ---------- NLP LOGIC ----------
+def process_text(text):
+    if not text.strip():
+        return [], [], [], []
 
-st.markdown("""
-This interactive app demonstrates **core NLP concepts**
-used in **Machine Learning and Artificial Intelligence**.
-""")
+    words = word_tokenize(text)
+    sentences = sent_tokenize(text)
 
-st.markdown("**Author:** Karne Siddhartha")
-st.markdown("---")
+    porter = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
 
-# User Input
-text = st.text_area(
-    "✍️ Enter text:",
-    "I love NLP with Python. It is the future of Artificial Intelligence!",
-    height=120
-)
+    stemmed = [(w, porter.stem(w)) for w in words if w.isalpha()]
+    lemmatized = [(w, lemmatizer.lemmatize(w)) for w in words if w.isalpha()]
 
-# Word Tokenization
-st.header("🔹 Word Tokenization")
-words = word_tokenize(text)
-st.code(words)
+    return words, sentences, stemmed, lemmatized
 
-# Sentence Tokenization
+# ---------- UI ----------
+with gr.Blocks(title="NLP Text Processing Playground") as demo:
+    gr.Markdown("## 🧠 NLP Text Processing Playground")
+    gr.Markdown(
+        "Tokenization • Stemming • Lemmatization  \n"
+        "**Author:** Karne Siddhartha"
+    )
 
-st.header("🔹 Sentence Tokenization")
-sentences = sent_tokenize(text)
+    text_input = gr.Textbox(
+        lines=4,
+        label="✍️ Enter text",
+        value="I love NLP with Python. It is the future of Artificial Intelligence!"
+    )
 
-for i, s in enumerate(sentences, start=1):
-    st.write(f"{i}. {s}")
+    run_btn = gr.Button("Run NLP Processing")
 
-st.write(f"**Total sentences:** {len(sentences)}")
+    word_out = gr.JSON(label="🔹 Word Tokens")
+    sent_out = gr.JSON(label="🔹 Sentence Tokens")
+    stem_out = gr.Dataframe(headers=["Original Word", "Stemmed Word"], label="🔹 Stemming")
+    lemma_out = gr.Dataframe(headers=["Original Word", "Lemmatized Word"], label="🔹 Lemmatization")
 
-# Stemming
-st.header("🔹 Stemming (Porter Stemmer)")
-porter = PorterStemmer()
+    run_btn.click(
+        process_text,
+        inputs=text_input,
+        outputs=[word_out, sent_out, stem_out, lemma_out]
+    )
 
-stemmed = [(w, porter.stem(w)) for w in words if w.isalpha()]
+demo.launch()
 
-st.table({
-    "Original Word": [w for w, _ in stemmed],
-    "Stemmed Word": [s for _, s in stemmed]
-})
-
-# Lemmatization
-st.header("🔹 Lemmatization (WordNet)")
-lemmatizer = WordNetLemmatizer()
-
-lemmatized = [(w, lemmatizer.lemmatize(w)) for w in words if w.isalpha()]
-
-st.table({
-    "Original Word": [w for w, _ in lemmatized],
-    "Lemmatized Word": [l for _, l in lemmatized]
-})
-
-# Footer
-st.markdown("---")
-st.markdown("Built with **Streamlit** and **NLTK**")
 
 
 
