@@ -3,11 +3,16 @@ import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 
-# ------------------ NLTK SETUP (HF SAFE) ------------------
+# ------------------ NLTK SETUP (HF SAFE, FIXED) ------------------
 def setup_nltk():
-    nltk.download("punkt", quiet=True)
-    nltk.download("wordnet", quiet=True)
-    nltk.download("omw-1.4", quiet=True)
+    resources = [
+        "punkt",
+        "punkt_tab",      # <-- REQUIRED (NEW)
+        "wordnet",
+        "omw-1.4"
+    ]
+    for r in resources:
+        nltk.download(r, quiet=True)
 
 setup_nltk()
 
@@ -26,12 +31,7 @@ def process_text(text):
         stemmed = [[w, porter.stem(w)] for w in words if w.isalpha()]
         lemmatized = [[w, lemmatizer.lemmatize(w)] for w in words if w.isalpha()]
 
-        return (
-            words,            # list[str]
-            sentences,        # list[str]
-            stemmed,          # list[list]
-            lemmatized        # list[list]
-        )
+        return words, sentences, stemmed, lemmatized
 
     except Exception as e:
         return (
@@ -77,8 +77,3 @@ with gr.Blocks(title="NLP Text Processing Playground") as demo:
     )
 
 demo.launch()
-
-
-
-
-
