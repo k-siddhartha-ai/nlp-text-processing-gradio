@@ -3,7 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 
-# ------------------ NLTK SETUP (HF SAFE, FIXED) ------------------
+# ------------------ NLTK SETUP  ------------------
 def setup_nltk():
     resources = [
         "punkt",
