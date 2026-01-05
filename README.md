@@ -7,13 +7,11 @@ using **Python, NLTK, and Gradio**.
 This project is designed as an **industry-grade demo application** showcasing
 end-to-end NLP concepts with a live, deployable interface.
 
----
 
 ## 🚀 Live Demo
-🔗 Hugging Face Space:  
-https://huggingface.co/spaces/<YOUR_USERNAME>/nlp-text-processing-gradio
+🔗 Hugging Face Space:
+https://huggingface.co/spaces/Siddhartha001/nlp-text-processing-gradio
 
----
 
 ## 📌 Features
 - Word tokenization
@@ -48,4 +46,4 @@ cd nlp-text-processing-gradio
 pip install -r requirements.txt
 python app.py
 
-```bash
+```
