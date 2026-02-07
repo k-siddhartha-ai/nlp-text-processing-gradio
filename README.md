@@ -1,49 +1,81 @@
-# NLP Text Processing App 🧠
+# 🧠 NLP Text Processing Playground
 
-An interactive **Natural Language Processing (NLP)** application that demonstrates
-core text processing techniques such as **tokenization, stemming, and lemmatization**
-using **Python, NLTK, and Gradio**.
+[![Python](https://img.shields.io/badge/Python-3.10-blue)]()
+[![NLTK](https://img.shields.io/badge/NLP-NLTK-green)]()
+[![Gradio](https://img.shields.io/badge/UI-Gradio-orange)]()
 
-This project is designed as an **industry-grade demo application** showcasing
-end-to-end NLP concepts with a live, deployable interface.
+An interactive NLP web application that demonstrates **Tokenization**, **Stemming**, and **Lemmatization** using NLTK with a Gradio interface.
 
+Built as an educational NLP playground to visualize core natural language processing techniques.
 
-## 🚀 Live Demo
-🔗 Hugging Face Space:
-https://huggingface.co/spaces/Siddhartha001/nlp-text-processing-gradio
+---
 
+## 👨‍💻 Author
 
-## 📌 Features
-- Word tokenization
-- Sentence tokenization
-- Stemming using **Porter Stemmer**
-- Lemmatization using **WordNet**
-- Interactive web UI with Gradio
-- Hugging Face deployment ready
+**K. Siddhartha — AI / NLP Developer**
 
+🔗 GitHub: [https://github.com/k-siddhartha-ai](https://github.com/k-siddhartha-ai)
+🤗 Hugging Face: [https://huggingface.co/Siddhartha001](https://huggingface.co/Siddhartha001)
 
-## 🛠 Tech Stack
-- **Python**
-- **NLTK**
-- **Gradio**
-- Hugging Face Spaces
+---
 
-## 🧠 NLP Concepts Covered
-- Text preprocessing
-- Linguistic normalization
-- Token-based transformations
-- Practical NLP pipeline design
+## 🚀 Overview
 
+This project provides an interactive interface where users can enter text and observe:
+
+* Word Tokenization
+* Sentence Tokenization
+* Porter Stemming
+* WordNet Lemmatization
+
+The goal is to demonstrate classical NLP preprocessing techniques in a visual and beginner-friendly way.
+
+---
+
+## 🧱 Architecture
+
+Frontend: Gradio Blocks UI
+NLP Engine: NLTK
+Processing Steps:
+
+User Input → Tokenization → Stemming → Lemmatization → Structured Output
+
+---
+
+## ✨ Features
+
+* 🔹 Word & Sentence Tokenization
+* 🌱 Porter Stemmer Processing
+* 📚 WordNet Lemmatization
+* 🖥️ Interactive Gradio Interface
+* 📊 Structured JSON & Table Outputs
+
+---
+
+## 🛠️ Tech Stack
+
+* Python
+* NLTK
+* Gradio
+
+---
 
 ## ▶️ Run Locally
 
-### 1️⃣ Clone the repository
-```bash
-
-git clone https://github.com/k-siddhartha-ai/nlp-text-processing-gradio.git
-cd nlp-text-processing-gradio
-
+```
 pip install -r requirements.txt
 python app.py
-
 ```
+
+---
+
+## 📌 Notes
+
+* Non-alphabetic tokens are filtered during stemming and lemmatization.
+* Designed as an NLP learning and visualization tool.
+
+---
+
+## 📄 License
+
+Educational NLP project by K. Siddhartha.
